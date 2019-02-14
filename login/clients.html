@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+  <script src="../js/jquery-1.6.3.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-database.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <h1> Записи на текущий период </h1>
+  <table style="width:100%" id="ex-table">
+    <tr id="object">
+      <th>Имя:</th>
+      <th>Почта:</th> 
+      <th>Контакты:</th>
+      <th>Адрес:</th>
+      <th>Телефон:</th>
+    </table> 
+    
+    <script>
+      var config = {
+        apiKey: "AIzaSyBoHuGvLR0aGdRMTftQrN9K_jRkpashANU",
+        authDomain: "nargiz-7d174.firebaseapp.com",
+        databaseURL: "https://nargiz-7d174.firebaseio.com",
+        projectId: "nargiz-7d174",
+        storageBucket: "nargiz-7d174.appspot.com",
+        messagingSenderId: "549920561823"
+      };
+      firebase.initializeApp(config);
+
+      var database = firebase.database();
+      var clientsRef = database.ref('clients');
+      clientsRef.on('value', function(snapshot) {
+        var content = '';
+        snapshot.forEach(function(childSnapshot) {
+          var val = childSnapshot.val();
+          content +='<tr>';
+          content += '<td>' + val.name + '</td>';
+          content += '<td>' + val.email + '</td>';
+          content += '<td>' + val.contacts + '</td>';
+          content += '<td>' + val.address + '</td>';
+          content += '<td>' + val.phone + '</td>';
+          content += '</tr>';
+        });
+        $('#ex-table').append(content);
+      });
+    </script>
+
+    
+  </body>
+  </html>
