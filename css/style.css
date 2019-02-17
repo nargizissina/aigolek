@@ -665,3 +665,14 @@ footer {
 	overflow:hidden;
 } 
 html, body {height:100%;}
+
+/********modal**********/
+.product img {
+	max-width: 100%;
+}
+
+.img-block {
+	width: 100%;
+	-webkit-background-size: cover;
+	background-size: cover;
+}
